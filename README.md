@@ -87,15 +87,10 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket"></a> [bucket](#input\_bucket) | Bucket to attach notifications to | `string` | n/a | yes |
-| <a name="input_environment"></a> [environment](#input\_environment) | Environment (sharedtools, dev, staging, qa, prod) | `string` | n/a | yes |
 | <a name="input_lambda_arn"></a> [lambda\_arn](#input\_lambda\_arn) | ARN of the lambda to invoke | `string` | n/a | yes |
-| <a name="input_organization"></a> [organization](#input\_organization) | Organization using this module. Used to prefix tags so that they are easily identified as being from your organization | `string` | n/a | yes |
-| <a name="input_product"></a> [product](#input\_product) | Tag used to group resources according to product | `string` | n/a | yes |
-| <a name="input_repo"></a> [repo](#input\_repo) | Tag used to point to the repo using this module | `string` | n/a | yes |
 | <a name="input_events"></a> [events](#input\_events) | Event to notify on | `list(string)` | <pre>[<br>  "s3:ObjectCreated:*"<br>]</pre> | no |
 | <a name="input_filter_prefix"></a> [filter\_prefix](#input\_filter\_prefix) | Prefix this notification should apply to | `string` | `null` | no |
 | <a name="input_filter_suffix"></a> [filter\_suffix](#input\_filter\_suffix) | Suffix this notification should apply to | `string` | `null` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Extra tags | `map(string)` | `{}` | no |
 
 ## Outputs
 

@@ -65,7 +65,7 @@ module "bucket_notification" {
   ]
 }
 
-resource "aws_s3_bucket_object" "object" {
+resource "aws_s3_object" "object" {
   bucket = module.s3.name
   key    = "test/test.3001-01-01-01.test.gz"
   source = "../src/test.3001-01-01-01.test.gz"
