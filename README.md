@@ -1,4 +1,4 @@
-# PBS TF bucket notification module
+# PBS TF Bucket Notification Module
 
 ## Installation
 
@@ -7,7 +7,7 @@
 Use this URL for the source of the module. See the usage examples below for more details.
 
 ```hcl
-github.com/pbs/terraform-aws-bucket-notification-module?ref=0.0.1
+github.com/pbs/terraform-aws-bucket-notification-module?ref=x.y.z
 ```
 
 ### Alternative Installation Methods
@@ -25,8 +25,8 @@ Optionally, use `filter_prefix` or `filter_suffix` to filter the objects that tr
 Integrate this module like so:
 
 ```hcl
-module "bucket-notification" {
-  source = "github.com/pbs/terraform-aws-bucket-notification-module?ref=0.0.1"
+module "bucket_notification" {
+  source = "github.com/pbs/terraform-aws-bucket-notification-module?ref=x.y.z"
 
   # Required Parameters
   bucket     = module.s3.name
@@ -46,7 +46,7 @@ module "bucket-notification" {
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
 
-`0.0.1`
+`x.y.z`
 
 Note, however that subtrees can be altered as desired within repositories.
 
@@ -62,14 +62,14 @@ Below is automatically generated documentation on this Terraform module using [t
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.2 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.5.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.66.1 |
 
 ## Modules
 
@@ -87,10 +87,15 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket"></a> [bucket](#input\_bucket) | Bucket to attach notifications to | `string` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | Environment (sharedtools, dev, staging, qa, prod) | `string` | n/a | yes |
 | <a name="input_lambda_arn"></a> [lambda\_arn](#input\_lambda\_arn) | ARN of the lambda to invoke | `string` | n/a | yes |
+| <a name="input_organization"></a> [organization](#input\_organization) | Organization using this module. Used to prefix tags so that they are easily identified as being from your organization | `string` | n/a | yes |
+| <a name="input_product"></a> [product](#input\_product) | Tag used to group resources according to product | `string` | n/a | yes |
+| <a name="input_repo"></a> [repo](#input\_repo) | Tag used to point to the repo using this module | `string` | n/a | yes |
 | <a name="input_events"></a> [events](#input\_events) | Event to notify on | `list(string)` | <pre>[<br>  "s3:ObjectCreated:*"<br>]</pre> | no |
 | <a name="input_filter_prefix"></a> [filter\_prefix](#input\_filter\_prefix) | Prefix this notification should apply to | `string` | `null` | no |
 | <a name="input_filter_suffix"></a> [filter\_suffix](#input\_filter\_suffix) | Suffix this notification should apply to | `string` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Extra tags | `map(string)` | `{}` | no |
 
 ## Outputs
 

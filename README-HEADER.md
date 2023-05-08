@@ -1,4 +1,4 @@
-# PBS TF bucket notification module
+# PBS TF Bucket Notification Module
 
 ## Installation
 
@@ -25,7 +25,7 @@ Optionally, use `filter_prefix` or `filter_suffix` to filter the objects that tr
 Integrate this module like so:
 
 ```hcl
-module "bucket-notification" {
+module "bucket_notification" {
   source = "github.com/pbs/terraform-aws-bucket-notification-module?ref=x.y.z"
 
   # Required Parameters
