@@ -1,4 +1,4 @@
-# PBS TF bucket notification module
+# PBS TF Bucket Notification Module
 
 ## Installation
 
@@ -7,7 +7,7 @@
 Use this URL for the source of the module. See the usage examples below for more details.
 
 ```hcl
-github.com/pbs/terraform-aws-bucket-notification-module?ref=0.0.3
+github.com/pbs/terraform-aws-bucket-notification-module?ref=x.y.z
 ```
 
 ### Alternative Installation Methods
@@ -25,8 +25,8 @@ Optionally, use `filter_prefix` or `filter_suffix` to filter the objects that tr
 Integrate this module like so:
 
 ```hcl
-module "bucket-notification" {
-  source = "github.com/pbs/terraform-aws-bucket-notification-module?ref=0.0.3"
+module "bucket_notification" {
+  source = "github.com/pbs/terraform-aws-bucket-notification-module?ref=x.y.z"
 
   # Required Parameters
   bucket     = module.s3.name
@@ -46,7 +46,7 @@ module "bucket-notification" {
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
 
-`0.0.3`
+`x.y.z`
 
 Note, however that subtrees can be altered as desired within repositories.
 
@@ -62,14 +62,14 @@ Below is automatically generated documentation on this Terraform module using [t
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.2 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.5.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.66.1 |
 
 ## Modules
 
