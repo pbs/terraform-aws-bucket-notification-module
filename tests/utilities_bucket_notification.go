@@ -3,6 +3,7 @@ package test
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -41,6 +42,21 @@ func testBucketNotificationModule(t *testing.T, variant string) {
 	assert.Contains(t, bucket, "ex-tf-bucket-notif")
 	assert.Contains(t, lambdaFunctionARN, "ex-tf-bucket-notif")
 
-	// Prove that the bucket notification is triggering the Lambda correctly
-	aws.GetS3ObjectContents(t, "us-east-1", bucket, "partitioned-test/year=3001/month=01/day=01/hour=01/test.3001-01-01-01.test.gz")
+	attempts := 0
+	maxAttempts := 10
+
+	for attempts < maxAttempts {
+		_, err := aws.GetS3ObjectContentsE(t, "us-east-1", bucket, "partitioned-test/year=3001/month=01/day=01/hour=01/test.3001-01-01-01.test.gz")
+		if err == nil {
+			break
+		}
+
+		time.Sleep(time.Second * 1)
+
+		attempts++
+	}
+
+	if attempts == maxAttempts {
+		t.Fatalf("Failed to find object in bucket after %d attempts", maxAttempts)
+	}
 }

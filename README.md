@@ -7,7 +7,7 @@
 Use this URL for the source of the module. See the usage examples below for more details.
 
 ```hcl
-github.com/pbs/terraform-aws-bucket-notification-module?ref=0.0.5
+github.com/pbs/terraform-aws-bucket-notification-module?ref=x.y.z
 ```
 
 ### Alternative Installation Methods
@@ -26,7 +26,7 @@ Integrate this module like so:
 
 ```hcl
 module "bucket_notification" {
-  source = "github.com/pbs/terraform-aws-bucket-notification-module?ref=0.0.5"
+  source = "github.com/pbs/terraform-aws-bucket-notification-module?ref=x.y.z"
 
   # Required Parameters
   bucket     = module.s3.name
@@ -46,7 +46,7 @@ module "bucket_notification" {
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
 
-`0.0.5`
+`x.y.z`
 
 Note, however that subtrees can be altered as desired within repositories.
 
@@ -79,7 +79,6 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_lambda_permission.allow_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [aws_s3_bucket_notification.bucket_notification](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification) | resource |
 
 ## Inputs
@@ -87,10 +86,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket"></a> [bucket](#input\_bucket) | Bucket to attach notifications to | `string` | n/a | yes |
-| <a name="input_lambda_arn"></a> [lambda\_arn](#input\_lambda\_arn) | ARN of the lambda to invoke | `string` | n/a | yes |
-| <a name="input_events"></a> [events](#input\_events) | Event to notify on | `list(string)` | <pre>[<br>  "s3:ObjectCreated:*"<br>]</pre> | no |
-| <a name="input_filter_prefix"></a> [filter\_prefix](#input\_filter\_prefix) | Prefix this notification should apply to | `string` | `null` | no |
-| <a name="input_filter_suffix"></a> [filter\_suffix](#input\_filter\_suffix) | Suffix this notification should apply to | `string` | `null` | no |
+| <a name="input_lambda_function_configurations"></a> [lambda\_function\_configurations](#input\_lambda\_function\_configurations) | List of lambda function configurations | <pre>list(object({<br>    id            = optional(string)<br>    lambda_arn    = string<br>    events        = list(string)<br>    filter_prefix = optional(string)<br>    filter_suffix = optional(string)<br>  }))</pre> | n/a | yes |
 
 ## Outputs
 

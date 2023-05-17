@@ -21,8 +21,9 @@ data "aws_iam_policy_document" "policy_doc" {
     ]
   }
 }
+
 module "lambda" {
-  source = "github.com/pbs/terraform-aws-lambda-module?ref=0.0.2"
+  source = "github.com/pbs/terraform-aws-lambda-module?ref=1.3.2"
 
   name = "ex-tf-bucket-notif"
 
@@ -39,7 +40,7 @@ module "lambda" {
 }
 
 module "s3" {
-  source = "github.com/pbs/terraform-aws-s3-module?ref=0.0.1"
+  source = "github.com/pbs/terraform-aws-s3-module?ref=1.0.3"
 
   name = "ex-tf-bucket-notif"
 
@@ -54,15 +55,29 @@ module "s3" {
 module "bucket_notification" {
   source = "../.."
 
-  bucket     = module.s3.name
-  lambda_arn = module.lambda.arn
+  bucket = module.s3.name
 
-  filter_prefix = "test"
-  filter_suffix = ".gz"
+  lambda_function_configurations = [{
+    id            = "test"
+    lambda_arn    = module.lambda.arn
+    events        = ["s3:ObjectCreated:*"]
+    filter_prefix = "test"
+    filter_suffix = ".gz"
+  }]
 
   depends_on = [
     module.s3,
   ]
+}
+
+module "lambda_permission" {
+  source = "github.com/pbs/terraform-aws-lambda-permission-module?ref=0.0.1"
+
+  statement_id  = "AllowExecutionFromS3"
+  action        = "lambda:InvokeFunction"
+  function_name = module.lambda.name
+  principal     = "s3.amazonaws.com"
+  source_arn    = module.s3.arn
 }
 
 resource "aws_s3_object" "object" {
@@ -74,5 +89,6 @@ resource "aws_s3_object" "object" {
 
   depends_on = [
     module.bucket_notification,
+    module.lambda_permission,
   ]
 }
